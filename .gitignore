@@ -1,4 +1,5 @@
 env/
+data/*
 __pycache__/*
 analysis/__pycache__/*
 analysis/xml.pyc
