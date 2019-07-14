@@ -3,6 +3,7 @@
 import argparse
 import analysis.csv as c_an
 import analysis.xml as x_an
+import logging as lg
 
 def parse_arguments():
 	parser = argparse.ArgumentParser()
@@ -12,12 +13,24 @@ def parse_arguments():
 
 def main():
 	args = parse_arguments()
-	datafile=args.datafile
-	if args.extension == 'xml':
-		x_an.launch_analysis('SyceronBrut.xml')
-	elif args.extension == 'csv':
-		c_an.launch_analysis('current_mps.csv')
+	import pdb; pdb.set_trace()
+	try:
+		datafile=args.datafile
+		if datafile == None:
+			raise warning('You must indicate a datafile')
+		else:
+			try:
+				if args.extension == 'xml':
+					x_an.launch_analysis(args.datafile)
+				elif args.extension == 'csv':
+					c_an.launch_analysis(args.datafile)
+			except FileNotFoundError as e:
+				print("Ow :( The file was not found. Here is the original message of the exception :",e
+			finally:
+				print('################ Analysis is over ############')
+	except Warning as e:
+		lg.warning(e)
 
 if __name__ == '__main__':
-#	main()
+	main()
 	
