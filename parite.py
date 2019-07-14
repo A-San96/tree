@@ -13,7 +13,8 @@ def parse_arguments():
 
 def main():
 	args = parse_arguments()
-	import pdb; pdb.set_trace()
+	if args.verbose:
+		lg.basicConfig(level=lg.DEBUG)
 	try:
 		datafile=args.datafile
 		if datafile == None:
@@ -27,7 +28,7 @@ def main():
 			except FileNotFoundError as e:
 				print("Ow :( The file was not found. Here is the original message of the exception :",e
 			finally:
-				print('################ Analysis is over ############')
+				lg.info('################ Analysis is over ############')
 	except Warning as e:
 		lg.warning(e)
 
